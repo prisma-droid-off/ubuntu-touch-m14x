@@ -1,0 +1,78 @@
+#!/bin/sh
+# Recover the Samsung M14 Novatek touchscreen after display blanking.
+# This is a userspace workaround for display-only screen off/on events.
+
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+BRIGHTNESS=/sys/class/backlight/panel/brightness
+TSP_CMD=/sys/class/sec/tsp/cmd
+TSP_RESULT=/sys/class/sec/tsp/cmd_result
+TAG=nvt-touch-recovery
+
+log_msg() {
+    logger -t "$TAG" -- "$*"
+}
+
+read_brightness() {
+    [ -r "$BRIGHTNESS" ] || return 1
+    cat "$BRIGHTNESS" 2>/dev/null
+}
+
+recover_touch() {
+    if [ ! -w "$TSP_CMD" ]; then
+        log_msg "touch command is not writable: $TSP_CMD"
+        return 1
+    fi
+
+    if ! printf '%s' check_connection > "$TSP_CMD"; then
+        log_msg "failed to write check_connection to $TSP_CMD"
+        return 1
+    fi
+
+    result=''
+    if [ -r "$TSP_RESULT" ]; then
+        result=$(cat "$TSP_RESULT" 2>/dev/null || true)
+    fi
+    log_msg "check_connection result: ${result:-<empty>}"
+}
+
+# Wait briefly for the backlight and touchscreen sysfs nodes after boot.
+i=0
+while [ "$i" -lt 60 ]; do
+    if [ -r "$BRIGHTNESS" ] && [ -w "$TSP_CMD" ]; then
+        break
+    fi
+    i=$((i + 1))
+    sleep 1
+done
+
+if [ ! -r "$BRIGHTNESS" ] || [ ! -w "$TSP_CMD" ]; then
+    log_msg "required sysfs nodes did not appear after 60 seconds"
+    exit 1
+fi
+
+# Match the original workaround's initial post-boot check.
+sleep 3
+recover_touch
+
+old_brightness=$(read_brightness || printf '%s' 0)
+log_msg "monitor started; brightness=$old_brightness"
+
+while :; do
+    new_brightness=$(read_brightness || printf '%s' 0)
+
+    # Recover only after the display has returned from brightness zero.
+    if [ "$old_brightness" = 0 ] && [ "$new_brightness" != 0 ]; then
+        log_msg "display wake detected: $old_brightness -> $new_brightness"
+        recover_touch
+        sleep 0.3
+        recover_touch
+        sleep 1
+    fi
+
+    old_brightness=$new_brightness
+    if [ "$new_brightness" = 0 ]; then
+        sleep 0.2
+    else
+        sleep 1
+    fi
+done

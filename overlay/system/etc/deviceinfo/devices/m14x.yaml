@@ -1,0 +1,29 @@
+m14x:
+  Vendor: Samsung
+  PrettyName: Samsung M14 5G
+  DeviceType: phone
+  GridUnit: 22
+  supportsRebootToRecovery: true
+  SupportedOrientations:
+    - Portrait
+    - Landscape
+    - InvertedLandscape
+
+  # Telephony (ofono-binder)
+  OfonoPlugin: binder
+  OfonoImplementsIms: true
+
+  # Mir / SurfaceFlinger rendering flags for Exynos Mali GPU
+  MirAndroidPlatformClientEglFlush: "all"
+  MirAndroidPlatformServerEglSync: false
+  MirAndroidPlatformServerPartialUpdates: false
+  XwaylandShm: true
+
+  Repowerd:
+    BacklightSysfsPath: "/sys/class/backlight/panel"
+    BrightnessMax: 306
+    PowerSupplies:
+      - battery
+      - usb
+      - ac
+    HasDoubleTapToWake: false

@@ -1,0 +1,12 @@
+[Unit]
+Description=Novatek touchscreen display-wake recovery
+After=systemd-udev-settle.service
+
+[Service]
+Type=simple
+ExecStart=/usr/libexec/nvt-touch-recovery
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
