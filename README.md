@@ -16,8 +16,19 @@ compile python2 and install:
 wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz && tar -xf Python-2.7.18.tar.xz && cd Python-2.7.18 && ./configure --prefix=/usr/local && make -j$(nproc) && sudo make altinstall && sudo ln -sf /usr/local/bin/python2.7 /usr/local/bin/python2 
 ```
 
+Create a directory named ‘bin’ in your home directory, and include it in your path:
 
-(If the one-liner above is missing packages, install the dependencies listed in the repository build scripts or your distribution's documentation.)
+``` bash
+mkdir -p ~/bin
+echo export PATH=\$PATH:\$HOME/bin >> ~/.bashrc
+source ~/.bashrc
+```
+Download the repo script and make it executable:
+
+``` bash
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+chmod a+rx ~/bin/repo
+```
 
 ## Build
 
@@ -100,13 +111,8 @@ Alternatively, `system.img` and `rootfs.img` are interchangeable; you can flash 
 
 ## Warnings and recommendations
 
+- This project is in alpha, don't make any issue or contact me for bugs.
 - Ensure you have a complete backup of user data before proceeding.
 - Make sure the vendor image has encryption disabled and vbmeta verification disabled; otherwise the device may not boot the custom images.
 - If you are unfamiliar with custom recoveries, partitions, or flashing, proceed with caution or seek assistance.
 
-## Support
-
-If you encounter build or installation issues, open an issue in this repository with:
-- A clear description of the problem
-- Relevant logs or terminal output
-- Steps you followed prior to the failure
