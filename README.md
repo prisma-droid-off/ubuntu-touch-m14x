@@ -68,7 +68,7 @@ The build produces an `./images` folder containing (typically) the following fil
 - init_boot.img
 - rootfs.img
 
-You can delete `system.img` and `dtbo.img` if not needed, and rename `rootfs.img` to `ubuntu.img` for installation.
+You should delete `system.img` and `dtbo.img` now, and rename `rootfs.img` to `ubuntu.img` for installation.
 
 ## Installation
 
