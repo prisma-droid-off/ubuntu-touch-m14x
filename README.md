@@ -1,5 +1,9 @@
 # Ubuntu Touch Port for m14x
 
+## Prerequisites
+   * one liner for ubuntu 24.04:
+     sudo apt update && sudo apt install -y git gnupg flex bison gperf build-essential zip curl libc6-dev libx11-dev libreadline-dev libgl-dev g++-multilib mingw-w64-i686-dev python3-markdown libxml2-utils xsltproc zlib1g-dev schedtool liblz4-tool bc lzop imagemagick libncurses-dev rsync ca-certificates cpio kmod libssl-dev libffi-dev libsqlite3-dev libbz2-dev libelf-dev unzip wget xz-utils android-sdk-libsparse-utils jq && wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz && tar -xf Python-2.7.18.tar.xz && cd Python-2.7.18 && ./configure --enable-optimizations --prefix=/usr/local && make -j$(nproc) && sudo make altinstall && sudo ln -sf /usr/local/bin/python2.7 /usr/local/bin/python2
+
 ## build steps:
   ./build.sh -b workdir
   ./build/prepare-fake-ota.sh out/device_**_usrmerge.tar.xz ota
