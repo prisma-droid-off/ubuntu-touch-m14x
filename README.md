@@ -7,7 +7,7 @@ This repository contains the build and installation steps for an Ubuntu Touch po
 Install required packages on Ubuntu 24.04 (one-liner):
 
 ```bash
-ssudo apt update && sudo apt install -y git gnupg flex bison gperf build-essential zip curl libc6-dev libx11-dev libreadline-dev libgl-dev g++-multilib mingw-w64-i686-dev python3-markdown libxml2-utils xsltproc zlib1g-dev schedtool liblz4-tool bc lzop imagemagick libncurses-dev rsync ca-certificates cpio kmod libssl-dev libffi-dev libsqlite3-dev libbz2-dev libelf-dev unzip wget xz-utils android-sdk-libsparse-utils jq
+sudo apt update && sudo apt install -y git gnupg flex bison gperf build-essential zip curl libc6-dev libx11-dev libreadline-dev libgl-dev g++-multilib mingw-w64-i686-dev python3-markdown libxml2-utils xsltproc zlib1g-dev schedtool liblz4-tool bc lzop imagemagick libncurses-dev rsync ca-certificates cpio kmod libssl-dev libffi-dev libsqlite3-dev libbz2-dev libelf-dev unzip wget xz-utils android-sdk-libsparse-utils jq
 ```
 
 compile python2 and install:
