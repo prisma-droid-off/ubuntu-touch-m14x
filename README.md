@@ -13,17 +13,17 @@
 * from here you can delete system.img dtbo.img and rename rootfs.img to ubuntu.img
 
 ## Instalation: 
-  flash a custom vendor with disabled encription and disabled vbmeta
-  boot to recovery, i built ofox for this device so i recommend that.
-  flash boot.img
-  flash init_boot.img
-  from custom recovery wipe /dalvik /data /cache /internal_storage /metadata
-  then change /data fs to ext4
-  **DONT WIPE /SDCARD**
-  im using an external sd to create a backup for /data 
-  if you don't have one i don't recommend flashing this!
-  **COPY UBUNTU.IMG TO /DATA**
-  now for install you can copy ubuntu.img to /data and enjoy ubuntu touch
-  system.img and rootfs.img are interchangable 
+  * flash a custom vendor with disabled encription and disabled vbmeta
+  * boot to recovery, i built ofox for this device so i recommend that.
+  * flash boot.img
+  * flash init_boot.img
+  * from custom recovery wipe /dalvik /data /cache /internal_storage /metadata
+  * then change /data fs to ext4
+  ### **DONT WIPE /SDCARD**
+  *  im using an external sd to create a backup for /data 
+  *  if you don't have one i don't recommend flashing this!
+  ### **COPY UBUNTU.IMG TO /DATA**
+  *   now for install you can copy ubuntu.img to /data and enjoy ubuntu touch
+  *   system.img and rootfs.img are interchangable 
   so you can also flash ubuntu.img into /system via fastboot
   but i don't recommend.
