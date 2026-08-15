@@ -19,11 +19,5 @@ m14x:
   MirAndroidPlatformServerPartialUpdates: false
   XwaylandShm: true
 
-  Repowerd:
-    BacklightSysfsPath: "/sys/class/backlight/panel"
-    BrightnessMax: 306
-    PowerSupplies:
-      - battery
-      - usb
-      - ac
-    HasDoubleTapToWake: false
+  # Repowered
+  BacklightSysfsPath: "/sys/class/backlight/panel"
