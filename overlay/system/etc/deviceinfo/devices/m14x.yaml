@@ -2,7 +2,7 @@ m14x:
   Vendor: Samsung
   PrettyName: Samsung M14 5G
   DeviceType: phone
-  GridUnit: 22
+  GridUnit: 21
   supportsRebootToRecovery: true
   SupportedOrientations:
     - Portrait
@@ -25,3 +25,17 @@ m14x:
 
   # Repowered
   BacklightSysfsPath: "/sys/class/backlight/panel"
+  
+  DisplayCutoutsCollapsed:
+    - 0 0 25 81
+    - 529 0 56 81
+    - 1055 0 25 81
+  DisplayCutoutsCollapsedLight:
+    - 0 0 22 81
+    - 528 0 85 81
+    - 1058 0 22 81
+  DisplayCutoutsExpanded:
+    - 0 0 3 147
+    - 446 0 200 147
+    - 1077 0 3 147
+
