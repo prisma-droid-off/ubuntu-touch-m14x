@@ -1,0 +1,11 @@
+[Unit]
+Description=Run device's specific hacks.
+DefaultDependencies=no
+Before=lxc-android-config.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh /usr/libexec/lxc-android-config/device-hacks
+
+[Install]
+WantedBy=multi-user.target

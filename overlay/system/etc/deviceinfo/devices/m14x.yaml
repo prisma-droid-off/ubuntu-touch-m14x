@@ -27,15 +27,15 @@ m14x:
   BacklightSysfsPath: "/sys/class/backlight/panel"
   
   DisplayCutoutsCollapsed:
-    - 0 0 25 81
-    - 529 0 56 81
-    - 1055 0 25 81
+    - 0 0 6 88
+    - 464 0 117 88
+    - 1074 0 6 88
   DisplayCutoutsCollapsedLight:
-    - 0 0 22 81
-    - 528 0 85 81
-    - 1058 0 22 81
+    - 0 0 2 88
+    - 445 0 140 88
+    - 1078 0 2 88
   DisplayCutoutsExpanded:
-    - 0 0 3 147
-    - 446 0 200 147
-    - 1077 0 3 147
+    - 0 0 11 147
+    - 443 0 200 147
+    - 1069 0 11 147
 
