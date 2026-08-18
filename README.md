@@ -116,3 +116,7 @@ Alternatively, `system.img` and `rootfs.img` are interchangeable; you can flash 
 - Make sure the vendor image has encryption disabled and vbmeta verification disabled; otherwise the device may not boot the custom images.
 - If you are unfamiliar with custom recoveries, partitions, or flashing, proceed with caution or seek assistance.
 
+=======
+
+
+
