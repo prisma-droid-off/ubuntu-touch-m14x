@@ -1,0 +1,17 @@
+# fix flashlight
+chown phablet /sys/devices/virtual/camera/flash/rear_flash
+chmod g+w /sys/devices/virtual/camera/flash/rear_flash
+chgrp phablet /sys/devices/virtual/camera/flash/rear_flash
+
+# Silence all wlan debug logging down to just errors/warnings
+printf '0xFF:0x03' > /proc/net/wlan/dbgLevel
+
+# enables wireless display support
+setprop debug.stagefright.c2inputsurface 1
+setprop ubuntu.widi.supported 1
+
+# Disable graphics.allocator service in Waydroid as it should use the host one
+if [ ! -e /var/lib/waydroid/overlay/vendor/etc/init/android.hardware.graphics.allocator@2.0-service.rc ]; then
+    mkdir -p /var/lib/waydroid/overlay/vendor/etc/init
+    ln -sf /dev/null /var/lib/waydroid/overlay/vendor/etc/init/android.hardware.graphics.allocator@2.0-service.rc
+fi
