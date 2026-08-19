@@ -1,0 +1,3 @@
+# Video decoding
+/dev/dma_heap/*     r,
+/dev/dma_heap/*     rw,
