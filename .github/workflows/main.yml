@@ -27,7 +27,6 @@ jobs:
         run: |
           pwd
           ls -la
-          git status
           cd "$GITHUB_WORKSPACE"
           ls -la
 
