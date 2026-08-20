@@ -19,16 +19,13 @@ jobs:
     container:
       image: ubuntu:22.04
 
+    defaults:
+      run:
+        shell: bash
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Debug workspace
-        run: |
-          pwd
-          ls -la
-          cd "$GITHUB_WORKSPACE"
-          ls -la
 
       - name: Install build dependencies
         run: |
