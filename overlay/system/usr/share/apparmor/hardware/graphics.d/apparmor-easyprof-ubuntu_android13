@@ -1,5 +1,5 @@
 # libhybris
-  /{,android/}{,system/}apex/com.android.i18n/lib{,64}/**     r,
-  /{,android/}{,system/}apex/com.android.i18n/lib{,64}/**.so  m,
-  /{,android/}apex/com.android.vndk.v[0-9][0-9]/lib{,64}/**.so r,
-  /{,android/}apex/com.android.vndk.v[0-9][0-9]/lib{,64}/**.so m,
+/{,android/}{,system/}apex/com.android.i18n/lib{,64}/**     r,
+/{,android/}{,system/}apex/com.android.i18n/lib{,64}/**.so  m,
+/{,android/}apex/com.android.vndk.v[0-9][0-9]/lib{,64}/**.so r,
+/{,android/}apex/com.android.vndk.v[0-9][0-9]/lib{,64}/**.so m,

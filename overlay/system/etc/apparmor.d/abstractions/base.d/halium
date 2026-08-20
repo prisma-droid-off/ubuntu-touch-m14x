@@ -4,5 +4,5 @@
 /etc/ubuntu-touch-session.d/ r,
 /etc/ubuntu-touch-session.d/* r,
 /usr/local/lib/python3.*/dist-packages/ r,
-deny /sys/kernel/tracing/trace_marker w,
-deny /sys/kernel/debug/tracing/trace_marker w,
+#deny /sys/kernel/tracing/trace_marker w,
+#deny /sys/kernel/debug/tracing/trace_marker w,
