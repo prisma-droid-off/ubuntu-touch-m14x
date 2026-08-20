@@ -11,3 +11,10 @@
 /{android/,}vendor/firmware/mfc_fw.bin r,
 # Wildcard fallback for all vendor firmware
 /{android/,}vendor/firmware/** r,
+# AppArmor self-check
+@{PROC}/@{pid}/attr/apparmor/current r,
+/sys/module/apparmor/parameters/enabled r,
+# System & CPU topology for QtWebEngine / Chromium
+/sys/devices/system/cpu/ r,
+/sys/devices/system/cpu/** r,
+@{PROC}/sys/fs/inotify/max_user_watches r,
