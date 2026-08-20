@@ -1,3 +1,15 @@
 # Video decoding
 /dev/dma_heap/*     r,
 /dev/dma_heap/*     rw,
+# Exynos Camera ISP Coprocessor & Sensor Tuning Files
+  /{android/,}vendor/firmware/pablo_icpufw.bin r,
+  /{android/,}vendor/firmware/setfile_*.bin r,
+  /{android/,}vendor/firmware/camera_tilt_calibration_info_* r,
+  /{android/,}vendor/firmware/SetMultiCalInfo.bin r,
+  /{android/,}vendor/firmware/OD_V*.bin r,
+
+  # Hardware Video Encoding / Decoding (MFC)
+  /{android/,}vendor/firmware/mfc_fw.bin r,
+
+  # Wildcard fallback for all vendor firmware
+  /{android/,}vendor/firmware/** r,
