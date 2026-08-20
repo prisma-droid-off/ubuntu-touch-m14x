@@ -23,6 +23,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Debug workspace
+        run: |
+          pwd
+          ls -la
+          git status
+          cd "$GITHUB_WORKSPACE"
+          ls -la
+
       - name: Install build dependencies
         run: |
           apt-get update
@@ -77,7 +85,8 @@ jobs:
 
       - name: Fetch and prepare OTA
         run: |
-          DEVICE="$(. deviceinfo && echo $deviceinfo_codename)"
+          cd "$GITHUB_WORKSPACE"
+          DEVICE="$(. ./deviceinfo && echo $deviceinfo_codename)"
           ./build/fetch-and-prepare-latest-ota.sh "20.04/arm64/android9plus/devel" "$DEVICE" ota
           mkdir -p out
           ./build/system-image-from-ota.sh ota/ubuntu_command out
@@ -124,7 +133,8 @@ jobs:
 
       - name: Process fake OTA and build images
         run: |
-          DEVICE="$(. deviceinfo && echo $deviceinfo_codename)"
+          cd "$GITHUB_WORKSPACE"
+          DEVICE="$(. ./deviceinfo && echo $deviceinfo_codename)"
           ./build/prepare-fake-ota.sh out/device_${DEVICE}.tar.xz ota
           mkdir -p out
           ./build/system-image-from-ota.sh ota/ubuntu_command out
