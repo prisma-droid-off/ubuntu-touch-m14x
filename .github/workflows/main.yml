@@ -1,32 +1,26 @@
 name: GSI Adaptation CI
-
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
   workflow_dispatch:
-
 env:
   ADAPTATION_TOOLS_BRANCH: main
   # ADAPTATION_TOOLS_USE_TMP_BUILD_DIR: 1
   # ADAPTATION_TOOLS_USE_BUILD_WRAPPER: 1
-
 jobs:
   build:
     name: Build Adaptation
     runs-on: ubuntu-22.04
     container:
       image: ubuntu:22.04
-
     defaults:
       run:
         shell: bash
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Install build dependencies
         run: |
           apt-get update
@@ -35,13 +29,11 @@ jobs:
             fakeroot flex git kmod libelf-dev libssl-dev libtinfo5 lz4 python2 python3 sudo unzip wget \
             xz-utils pahole libbpf-dev
           ln -sf python2 /usr/bin/python
-
       - name: Clone adaptation build tools
         run: |
           git clone -b ${{ env.ADAPTATION_TOOLS_BRANCH }} \
             https://gitlab.com/ubports/porting/community-ports/halium-generic-adaptation-build-tools.git \
             build
-
       - name: Run build script
         run: |
           if [ -z "$ADAPTATION_TOOLS_USE_BUILD_WRAPPER" ]; then
@@ -49,7 +41,6 @@ jobs:
           else
             ./build.sh
           fi
-
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -61,32 +52,30 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: ubuntu:22.04
+    defaults:
+      run:
+        shell: bash
     # Runs manually via workflow_dispatch input or can be un-commented if needed
     if: github.event_name == 'workflow_dispatch'
-    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Install dependencies
         run: |
           apt-get update
           apt-get install -y git img2simg jq sudo wget xz-utils
-
       - name: Clone adaptation build tools
         run: |
           git clone -b ${{ env.ADAPTATION_TOOLS_BRANCH }} \
             https://gitlab.com/ubports/porting/community-ports/halium-generic-adaptation-build-tools.git \
             build
-
       - name: Fetch and prepare OTA
         run: |
           cd "$GITHUB_WORKSPACE"
-          DEVICE="$(. ./deviceinfo && echo $deviceinfo_codename)"
+          DEVICE="$(. ./deviceinfo && echo "$deviceinfo_codename")"
           ./build/fetch-and-prepare-latest-ota.sh "20.04/arm64/android9plus/devel" "$DEVICE" ota
           mkdir -p out
           ./build/system-image-from-ota.sh ota/ubuntu_command out
-
       - name: Upload flashable artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -103,41 +92,38 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: ubuntu:22.04
+    defaults:
+      run:
+        shell: bash
     needs: [ build ]
     continue-on-error: true
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Download build output artifact
         uses: actions/download-artifact@v4
         with:
           name: build-out
           path: out
-
       - name: Install dependencies
         run: |
           apt-get update
           apt-get install -y git img2simg jq sudo wget xz-utils zstd
-
       - name: Clone adaptation build tools
         run: |
           git clone -b ${{ env.ADAPTATION_TOOLS_BRANCH }} \
             https://gitlab.com/ubports/porting/community-ports/halium-generic-adaptation-build-tools.git \
             build
-
       - name: Process fake OTA and build images
         run: |
           cd "$GITHUB_WORKSPACE"
-          DEVICE="$(. ./deviceinfo && echo $deviceinfo_codename)"
-          ./build/prepare-fake-ota.sh out/device_${DEVICE}.tar.xz ota
+          DEVICE="$(. ./deviceinfo && echo "$deviceinfo_codename")"
+          ./build/prepare-fake-ota.sh "out/device_${DEVICE}.tar.xz" ota
           mkdir -p out
           ./build/system-image-from-ota.sh ota/ubuntu_command out
           mv out/rootfs.img out/ubuntu.img
           zstd --ultra -22 -T0 out/ubuntu.img
           rm -f out/ubuntu.img
-
       - name: Upload devel flashable artifacts
         uses: actions/upload-artifact@v4
         with:
