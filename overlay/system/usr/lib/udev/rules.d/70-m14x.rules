@@ -72,3 +72,15 @@ ACTION=="add|change", KERNEL=="mtp_usb", OWNER="root", GROUP="system", MODE="066
 ACTION=="add|change", KERNEL=="tun", OWNER="system", GROUP="system", MODE="0660"
 ACTION=="add|change", KERNEL=="ppp", OWNER="root", GROUP="system", MODE="0660"
 ACTION=="add|change", KERNEL=="kvm|vhost-vsock", OWNER="system", GROUP="system", MODE="0600"
+ACTION=="add|change", KERNEL=="gnss_ipc", OWNER="root", GROUP="gps", MODE="0660"
+ACTION=="add|change", KERNEL=="gnss*", OWNER="root", GROUP="gps", MODE="0660"
+ACTION=="add|change", KERNEL=="pn547", OWNER="root", GROUP="root", MODE="0660"
+ACTION=="add|change", KERNEL=="sec-nfc", OWNER="root", GROUP="root", MODE="0660"
+ACTION=="add|change", KERNEL=="st21nfc", OWNER="root", GROUP="root", MODE="0660"
+ACTION=="add|change", KERNEL=="p3", OWNER="root", GROUP="root", MODE="0660"
+ACTION=="add|change", KERNEL=="p61", OWNER="root", GROUP="root", MODE="0660"
+ACTION=="add|change", KERNEL=="st54spi", OWNER="root", GROUP="root", MODE="0660"
+# Fix Samsung Galaxy M14 5G Rear Flashlight permissions for Lomiri/Phablet
+# Reference commit: https://gitlab.com/ubports/porting/reference-device-ports/android10/volla-phone-x/volla-yggdrasilx/-/commit/fe0c020f62817de61537799433c5f33007bcedd7
+ACTION=="add|change", SUBSYSTEM=="platform|virtual", RUN+="/bin/chgrp phablet /sys/devices/virtual/camera/flash/rear_flash"
+ACTION=="add|change", SUBSYSTEM=="platform|virtual", RUN+="/bin/chmod g+w /sys/devices/virtual/camera/flash/rear_flash"
